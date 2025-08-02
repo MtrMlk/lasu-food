@@ -1,7 +1,10 @@
+import { useUpdateMyUSer } from "@/api/MyUserApi";
 import UserProfileForm from "@/forms/user-profile-form/UserProfileForm";
 
 const UserProfilePage = () => {
-  return <UserProfileForm />;
+  const { updateUser, isPending } = useUpdateMyUSer();
+
+  return <UserProfileForm onSave={updateUser} isPending={isPending} />;
 };
 
 export default UserProfilePage;
