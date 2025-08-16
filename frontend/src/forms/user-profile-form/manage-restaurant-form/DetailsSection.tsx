@@ -69,7 +69,7 @@ const DetailsSection = () => {
           <FormItem className="max-w-[25%]">
             <FormLabel>Delivery Price (₦)</FormLabel>
             <FormControl>
-              <Input {...field} className="bg-white" placeholder="1.50" />
+              <Input {...field} className="bg-white" placeholder="500.50" />
             </FormControl>
             <FormMessage />
           </FormItem>
