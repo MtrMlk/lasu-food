@@ -1,11 +1,15 @@
-import food1 from "../assets/food1.png"
+import food1 from "../assets/istockphoto-1383962772-612x612.png";
 
 const Hero = () => {
-  return(
+  return (
     <div>
-        <img src={food1} className="w-full max-h- [600px] object-cover" />
+      <img
+        src={food1}
+        className="w-full max-h- [600px] object-cover"
+        alt="food1"
+      />
     </div>
   );
-}
+};
 
 export default Hero;
