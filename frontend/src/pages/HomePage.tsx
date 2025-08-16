@@ -20,7 +20,7 @@ const HomePage = () => {
           </span>
           <span className="text-gray-700">
             {" "}
-            Download The LASUFood app For Faster Ordering Within LASU
+            Download The LASU Food app For Faster Ordering Within LASU
           </span>
           <img src={appDownloadImage} />
         </div>
