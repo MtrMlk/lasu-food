@@ -1,4 +1,4 @@
-import food1 from "../assets/istockphoto-1383962772-612x612.png";
+import food1 from "../assets/istockphoto-1383962772-612x612.jpg";
 
 const Hero = () => {
   return (
