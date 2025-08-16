@@ -13,7 +13,7 @@ const HomePage = () => {
         </span>
       </div>
       <div className="grid md:grid-cols-2 gap-5">
-        <img src={landingImage} />
+        <img src={landingImage} alt="Landing Image" />
         <div className="flex flex-col items-center justify-center gap-4 text-center">
           <span className="font-bold text-3xl tracking-tighter">
             Order Takeaway Even Faster!
@@ -22,7 +22,7 @@ const HomePage = () => {
             {" "}
             Download The LASU Food app For Faster Ordering Within LASU
           </span>
-          <img src={appDownloadImage} />
+          <img src={appDownloadImage} alt="App Download Image" />
         </div>
       </div>
     </div>
