@@ -20,19 +20,19 @@ router.get("/", jwtCheck, jwtParse, MyRestaurantController.getMyRestaurant);
 // /api/my/restaurant
 router.post(
   "/",
-  upload.single("imageFile"),
-  validateMyRestaurantRequest,
   jwtCheck,
   jwtParse,
+  upload.single("imageFile"),
+  validateMyRestaurantRequest,
   MyRestaurantController.createMyRestaurant
 );
 
 router.put(
   "/",
-  upload.single("imageFile"),
-  validateMyRestaurantRequest,
   jwtCheck,
   jwtParse,
+  upload.single("imageFile"),
+  validateMyRestaurantRequest,
   MyRestaurantController.updateMyRestaurant
 );
 

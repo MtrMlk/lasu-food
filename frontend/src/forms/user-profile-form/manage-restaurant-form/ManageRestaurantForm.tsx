@@ -14,16 +14,28 @@ import { useEffect } from "react";
 
 const formSchema = z
   .object({
-    restaurantName: z.string().nonempty("Restaurant Name Is Required!"),
-    city: z.string().nonempty("City Name Is Required!"),
-    country: z.string().nonempty("Country Name Is Required!"),
+    restaurantName: z
+      .string("Restaurant Name Is Required!")
+      .nonempty({ error: "Restaurant Name Is Required!" }),
+    shopNumber: z.string().optional(),
+    shopAddress: z
+      .string({ error: "Shop Address Is Required!" })
+      .nonempty({ error: "Shop Address Is Required!" }),
+    shopLocation: z
+      .string("Shop Location Is Required!")
+      .nonempty("Shop Location Is Required!"),
+    campus: z.enum(["ojo", "epe"], {
+      error: "Campus must be either Ojo or Epe!",
+    }),
     deliveryPrice: z.coerce
       .number<number>("Delivery Price must be a number!")
       .min(1, "Delivery Price is required!"),
     estimatedDeliveryTime: z.coerce
       .number<number>("Estimated Delivery Time must be a number!")
       .min(1, "Estimated Delivery Time is required!"),
-    cuisines: z.array(z.string()).nonempty("Please Select At Least One Item!"),
+    cuisines: z
+      .array(z.string({ error: "Please Select At Least One Item!" }))
+      .nonempty("Please Select At Least One Item!"),
     menuItems: z.array(
       z.object({
         name: z.string().nonempty("Is Required!"),
@@ -73,21 +85,26 @@ const ManageRestaurantForm = ({ onSave, isPending, restaurant }: Props) => {
       price: parseInt((item.price / 100).toFixed(2)),
     }));
 
-    const updatedRestuarant = {
+    const updatedRestaurant = {
       ...restaurant,
       deliveryPrice: deliveryPriceFormatted,
       menuItems: menuItemsFormatted,
     };
 
-    form.reset(updatedRestuarant);
+    form.reset(updatedRestaurant);
   }, [form, restaurant]);
 
   const onSubmit = (formDataJson: RestaurantFormData) => {
     const formData = new FormData();
 
     formData.append("restaurantName", formDataJson.restaurantName);
-    formData.append("city", formDataJson.city);
-    formData.append("country", formDataJson.country);
+
+    if (formDataJson.shopNumber) {
+      formData.append("shopNumber", formDataJson.shopNumber);
+    }
+    formData.append("shopAddress", formDataJson.shopAddress);
+    formData.append("shopLocation", formDataJson.shopLocation);
+    formData.append("campus", formDataJson.campus);
 
     formData.append(
       "deliveryPrice",

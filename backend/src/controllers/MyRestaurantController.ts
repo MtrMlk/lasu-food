@@ -22,7 +22,13 @@ const createMyRestaurant = async (req: Request, res: Response) => {
     const existingRestaurant = await Restaurant.findOne({ user: req.userId });
 
     if (existingRestaurant) {
-      res.status(409).json({ message: "User Restaurant alrady exists" });
+      res.status(409).json({ message: "User Restaurant already exists" });
+      return;
+    }
+
+    const { campus } = req.body;
+    if (!campus || !["ojo", "epe"].includes(campus.toLowerCase())) {
+      res.status(400).json({ message: "Campus must be either 'ojo' or 'epe'" });
       return;
     }
 
@@ -50,9 +56,21 @@ const updateMyRestaurant = async (req: Request, res: Response) => {
       return;
     }
 
+    if (
+      req.body.campus &&
+      !["ojo", "epe"].includes(req.body.campus.toLowerCase())
+    ) {
+      res
+        .status(400)
+        .json({ message: "Campus must be either 'ojo' or 'epe'!" });
+      return;
+    }
+
     restaurant.restaurantName = req.body.restaurantName;
-    restaurant.city = req.body.city;
-    restaurant.country = req.body.country;
+    restaurant.shopNumber = req.body.shopNumber;
+    restaurant.shopAddress = req.body.shopAddress;
+    restaurant.shopLocation = req.body.shopLocation;
+    restaurant.campus = req.body.campus;
     restaurant.deliveryPrice = req.body.deliveryPrice;
     restaurant.estimatedDeliveryTime = req.body.estimatedDeliveryTime;
     restaurant.cuisines = req.body.cuisines;

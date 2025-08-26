@@ -8,8 +8,15 @@ const menuItemSchema = new mongoose.Schema({
 const restaurantSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   restaurantName: { type: String, required: true },
-  city: { type: String, required: true },
-  country: { type: String, required: true },
+  shopNumber: { type: String, required: false },
+  shopAddress: { type: String, required: true },
+  shopLocation: { type: String, required: true },
+  campus: {
+    type: String,
+    required: true,
+    enum: ["ojo", "epe"],
+    lowercase: true,
+  },
   deliveryPrice: { type: Number, required: true },
   estimatedDeliveryTime: { type: Number, required: true },
   cuisines: [{ type: String, required: true }],

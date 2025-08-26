@@ -7,6 +7,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useFormContext } from "react-hook-form";
 
 const DetailsSection = () => {
@@ -17,7 +24,7 @@ const DetailsSection = () => {
         <h2 className="text-2xl font-bold"> Details</h2>
         <FormDescription>
           {" "}
-          Enter The Details About You Restuarant{" "}
+          Enter The Details About Your Restuarant{" "}
         </FormDescription>
       </div>
       <FormField
@@ -25,9 +32,13 @@ const DetailsSection = () => {
         name="restaurantName"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Name</FormLabel>
+            <FormLabel>Canteen Name</FormLabel>
             <FormControl>
-              <Input {...field} className="bg-white" />
+              <Input
+                {...field}
+                className="bg-white"
+                placeholder="e.g. Amala Plus"
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -36,12 +47,16 @@ const DetailsSection = () => {
       <div className="flex gap-4">
         <FormField
           control={control}
-          name="city"
+          name="shopNumber"
           render={({ field }) => (
             <FormItem className="flex-1">
-              <FormLabel>City</FormLabel>
+              <FormLabel>Shop Number (Optional)</FormLabel>
               <FormControl>
-                <Input {...field} className="bg-white" />
+                <Input
+                  {...field}
+                  className="bg-white"
+                  placeholder="e.g., Shop 15"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -49,18 +64,62 @@ const DetailsSection = () => {
         />
         <FormField
           control={control}
-          name="country"
+          name="campus"
           render={({ field }) => (
             <FormItem className="flex-1">
-              <FormLabel>Country</FormLabel>
-              <FormControl>
-                <Input {...field} className="bg-white" />
-              </FormControl>
+              <FormLabel>Campus</FormLabel>
+              <Select onValueChange={field.onChange} value={field.value}>
+                <FormControl>
+                  <SelectTrigger className="bg-white">
+                    <SelectValue placeholder="Select campus" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="ojo">Ojo Campus (Main)</SelectItem>
+                  <SelectItem value="epe">Epe Campus</SelectItem>
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}
         />
       </div>
+
+      <FormField
+        control={control}
+        name="shopAddress"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Shop Address</FormLabel>
+            <FormControl>
+              <Input
+                {...field}
+                className="bg-white"
+                placeholder="e.g., Science Market"
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={control}
+        name="shopLocation"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Shop Location Description</FormLabel>
+            <FormControl>
+              <Input
+                {...field}
+                className="bg-white"
+                placeholder="e.g., Faculty of Science"
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
       <FormField
         control={control}

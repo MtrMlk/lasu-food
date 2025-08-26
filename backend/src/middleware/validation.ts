@@ -26,9 +26,35 @@ export const validateMyUserRequest = [
 ];
 
 export const validateMyRestaurantRequest = [
-  body("restaurantName").notEmpty().withMessage("Restaurant name is required!"),
-  body("city").notEmpty().withMessage("city is required!"),
-  body("country").notEmpty().withMessage("country is required!"),
+  body("restaurantName")
+    .notEmpty()
+    .withMessage("Restaurant name is required!")
+    .isString()
+    .withMessage("Restaurant name must be a string"),
+  body("shopNumber")
+    .optional()
+    .isString()
+    .withMessage("Shop number must be a string if provided"),
+  // Required shop address
+  body("shopAddress")
+    .notEmpty()
+    .withMessage("Shop address is required!")
+    .isString()
+    .withMessage("Shop address must be a string"),
+  // Required shop location
+  body("shopLocation")
+    .notEmpty()
+    .withMessage("Shop location is required!")
+    .isString()
+    .withMessage("Shop location must be a string"),
+  // Required campus with enum validation
+  body("campus")
+    .notEmpty()
+    .withMessage("Campus is required!")
+    .isIn(["ojo", "epe"])
+    .withMessage("Campus must be either 'ojo' or 'epe'")
+    .toLowerCase()
+    .withMessage("Campus will be converted to lowercase"),
   body("deliveryPrice")
     .isFloat({ min: 0 })
     .withMessage("Delivery Price must be a positive number"),
